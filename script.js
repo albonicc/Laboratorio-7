@@ -1,11 +1,17 @@
 const charactersButtonsDiv = document.querySelector('#characters-buttons');
 const charactersDiv = document.querySelector('#characters');
+const addButton = document.querySelector('#add-character');
 const API_KEY = 'WVhsJQJWD74sFtgKBR0iwCYlMlVQs78H';
-// const URL = "https://api.giphy.com/v1/gifs/search?q=" + type + "&api_key=PU9MVKA0tF1Zuu50yJAY3mumUmTGZxy1&limit=10";
 const spongebobCharacters = ['Spongebob Squarepants', 'Patrick Star', 'Squidward', 'Mr Krabs', 
                             'Plankton', 'Sandy Cheeks', 'Larry the lobster', 
                             'Mermaid Man', 'Barnacle Boy'];
 
+const addCharacterButton = () => {
+    const character = document.querySelector('#character-input').value;
+    let characterID = character.split(' ').join('-').toLowerCase();
+    charactersButtonsDiv.innerHTML += `<button id="${characterID}" onclick="getButtonValue('${characterID}')">${character}</button>`
+}
+ 
 const getGIFs = async (character) => {
     const URL = `https://api.giphy.com/v1/gifs/search?q=${character}&api_key=${API_KEY}&limit=10`;
     const response = await fetch(URL);
@@ -54,5 +60,5 @@ const getButtonValue = (characterID) => {
 spongebobCharacters.forEach(character => {
     let characterID = character.split(' ').join('-').toLowerCase();
 
-    charactersButtonsDiv.innerHTML += `<button id="${characterID}" onclick="getButtonValue('${characterID}')">${character}</button>`
+    charactersButtonsDiv.innerHTML += `<button id="${characterID}" onclick="getButtonValue('${characterID}')">${character}</button>`;
 })
